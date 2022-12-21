@@ -20,7 +20,7 @@ import java.util.Map;
  * @author mofan
  * @date 2022/12/18 16:24
  */
-@SpringBootTest
+@SpringBootTest(classes = TestApplication.class)
 public class BeanTest {
     @Autowired
     private ConfigurableApplicationContext context;
