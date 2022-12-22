@@ -1,7 +1,6 @@
 package indi.mofan.bean.a02;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -12,7 +11,9 @@ import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @author mofan
@@ -46,8 +47,17 @@ public class TestBeanFactory {
         // 有 Bean1，但是 Bean2 没有注入到 Bean1 里
 //        System.out.println(beanFactory.getBean(Bean1.class).getBean2());
         // Bean 后置处理器，对 Bean 的生命周期的各个阶段提供拓展，例如 @AutoWired...
-        beanFactory.getBeansOfType(BeanPostProcessor.class).values().forEach(beanFactory::addBeanPostProcessor);
+        beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream()
+                .sorted(Objects.requireNonNull(beanFactory.getDependencyComparator()))
+                .forEach(i -> {
+            System.out.println(">>>> " + i);
+            beanFactory.addBeanPostProcessor(i);
+        });
+        // 预先初始化单例对象（完成依赖注入和初始化流程）
+        beanFactory.preInstantiateSingletons();
+        System.out.println("---------------------------------------------");
         System.out.println(beanFactory.getBean(Bean1.class).getBean2());
+        System.out.println(beanFactory.getBean(Bean1.class).getInter());
     }
 
     @Configuration
@@ -61,11 +71,38 @@ public class TestBeanFactory {
         public Bean2 bean2() {
             return new Bean2();
         }
+
+        @Bean
+        public Bean3 bean3() {
+            return new Bean3();
+        }
+
+        @Bean
+        public Bean4 bean4() {
+            return new Bean4();
+        }
     }
 
-    static class Bean1 {
-        public static final Logger log = LoggerFactory.getLogger(Bean1.class);
+    interface Inter {
 
+    }
+
+    @Slf4j
+    static class Bean3 implements Inter {
+        public Bean3() {
+            log.debug("构造 Bean3()");
+        }
+    }
+
+    @Slf4j
+    static class Bean4 implements Inter {
+        public Bean4() {
+            log.debug("构造 Bean4()");
+        }
+    }
+
+    @Slf4j
+    static class Bean1 {
         public Bean1() {
             log.debug("构造 Bean1()");
         }
@@ -76,11 +113,18 @@ public class TestBeanFactory {
         public Bean2 getBean2() {
             return bean2;
         }
+
+        @Autowired
+        @Resource(name = "bean4")
+        private Inter bean3;
+
+        private Inter getInter() {
+            return bean3;
+        }
     }
 
+    @Slf4j
     static class Bean2 {
-        public static final Logger log = LoggerFactory.getLogger(Bean2.class);
-
         public Bean2() {
             log.debug("构造 Bean2()");
         }
