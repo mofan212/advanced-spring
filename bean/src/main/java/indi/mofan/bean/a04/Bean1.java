@@ -24,6 +24,7 @@ public class Bean1 {
         this.bean2 = bean2;
     }
 
+    @Autowired
     private Bean3 bean3;
 
     @Resource
