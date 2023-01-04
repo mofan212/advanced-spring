@@ -46,7 +46,7 @@ public class TestBeanFactory {
         System.out.println("---------------------------------------------");
         // 有 Bean1，但是 Bean2 没有注入到 Bean1 里
 //        System.out.println(beanFactory.getBean(Bean1.class).getBean2());
-        // Bean 后置处理器，对 Bean 的生命周期的各个阶段提供拓展，例如 @AutoWired...
+        // Bean 后置处理器，对 Bean 的生命周期的各个阶段提供拓展，例如 @AutoWired @Resource...
         beanFactory.getBeansOfType(BeanPostProcessor.class).values().stream()
                 .sorted(Objects.requireNonNull(beanFactory.getDependencyComparator()))
                 .forEach(i -> {

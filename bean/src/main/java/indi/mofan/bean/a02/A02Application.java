@@ -47,7 +47,7 @@ public class A02Application {
      * 基于磁盘路径下 xml 格式的配置文件来创建
      */
     private static void testFileSystemXmlApplicationContext() {
-        // 相对路径，以模块为起点
+        // 使用相对路径时，以模块为起点（IDEA 中需要设置 Working directory），也支持绝对路径
         FileSystemXmlApplicationContext context = new FileSystemXmlApplicationContext("bean\\src\\main\\resources\\b01.xml");
         Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
         System.out.println(context.getBean(Bean2.class).getBean1());
@@ -86,21 +86,26 @@ public class A02Application {
     static class WebConfig {
         @Bean
         public ServletWebServerFactory servletWebServerFactory() {
+            // 提供内嵌的 Web 容器
             return new TomcatServletWebServerFactory();
         }
 
         @Bean
         public DispatcherServlet dispatcherServlet() {
+            // 添加前控制器
             return new DispatcherServlet();
         }
 
         @Bean
         public DispatcherServletRegistrationBean registrationBean(DispatcherServlet dispatcherServlet) {
+            // 将 DispatcherServlet 注册到 Tomcat 服务器
             return new DispatcherServletRegistrationBean(dispatcherServlet, "/");
         }
 
+        // 如果 bean 以 '/' 开头，将 '/' 后的 bean 的名称作为访问路径
         @Bean("/hello")
         public Controller controller1() {
+            // 添加控制器，用于展示
             return (request, response) -> {
                 response.getWriter().println("hello");
                 return null;
