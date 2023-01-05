@@ -27,6 +27,7 @@ public class MyBeanPostProcessor implements InstantiationAwareBeanPostProcessor,
         if ("lifeCycleBean".equals(beanName)) {
             log.info("<<<<<<<<<< 实例化之前执行，这里返回的对象会替换掉原本的 bean");
         }
+        // 返回 null，则不会替换原有的 bean
         return null;
     }
 
@@ -34,7 +35,7 @@ public class MyBeanPostProcessor implements InstantiationAwareBeanPostProcessor,
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         if ("lifeCycleBean".equals(beanName)) {
             log.info("<<<<<<<<<< 实例化之后执行，如果返回 false 会跳过依赖注入节点");
-//            return false;
+            // return false;
         }
         return true;
     }
