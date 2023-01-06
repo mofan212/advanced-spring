@@ -21,6 +21,7 @@ public class DigInAutowired {
     @SneakyThrows
     public static void main(String[] args) {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        // 注册成品 Bean，不再进行 Bean 的创建、依赖注入、初始化等操作
         beanFactory.registerSingleton("bean2", new Bean2());
         beanFactory.registerSingleton("bean3", new Bean3());
         // @Value
@@ -40,6 +41,7 @@ public class DigInAutowired {
 
         Method method = AutowiredAnnotationBeanPostProcessor.class.getDeclaredMethod("findAutowiringMetadata", String.class, Class.class, PropertyValues.class);
         method.setAccessible(true);
+        // 获取 Bean1 上加了 @Value、@Autowired 注解的成员变量、方法参数信息
         InjectionMetadata metadata = (InjectionMetadata) method.invoke(postProcessor, "bean1", Bean1.class, null);
         // 此处断点
         System.out.println(metadata);
@@ -55,6 +57,7 @@ public class DigInAutowired {
         System.out.println(o1);
 
         Method setBean2 = Bean1.class.getDeclaredMethod("setBean2", Bean2.class);
+        // MethodParameter 构造方法的第二个参数表示需要解析的方法中参数的索引
         DependencyDescriptor dd2 = new DependencyDescriptor(new MethodParameter(setBean2, 0), false);
         Object o2 = beanFactory.doResolveDependency(dd2, null, null, null);
         System.out.println(o2);
