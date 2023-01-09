@@ -1,0 +1,9 @@
+<aspectj>
+    <aspects>
+        <aspect name="indi.mofan.aop.MyAspect"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="indi.mofan.service.MyService"/>
+            <include within="indi.mofan.aop.MyAspect"/>
+        </weaver>
+    </aspects>
+</aspectj>

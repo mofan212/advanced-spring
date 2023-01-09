@@ -8,6 +8,7 @@
         <module>bean</module>
         <module>test</module>
         <module>aspectj_01</module>
+        <module>aspectj_02</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
