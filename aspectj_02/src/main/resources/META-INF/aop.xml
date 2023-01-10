@@ -1,8 +1,11 @@
 <aspectj>
     <aspects>
+        <!--    切面类全限定类名    -->
         <aspect name="indi.mofan.aop.MyAspect"/>
         <weaver options="-verbose -showWeaveInfo">
+            <!--      被增强方法所在类的全限定类名      -->
             <include within="indi.mofan.service.MyService"/>
+            <!--    切面类全限定类名    -->
             <include within="indi.mofan.aop.MyAspect"/>
         </weaver>
     </aspects>
