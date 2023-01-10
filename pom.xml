@@ -9,6 +9,7 @@
         <module>test</module>
         <module>aspectj_01</module>
         <module>aspectj_02</module>
+        <module>aop</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
