@@ -19,6 +19,9 @@ public class JdkProxyDemo {
     }
 
     public static void main(String[] args) {
+        // 将动态代理生成的 class 保存到磁盘
+        // System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+
         // 原始对象
         Target target = new Target();
 
