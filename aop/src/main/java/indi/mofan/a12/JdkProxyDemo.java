@@ -37,5 +37,11 @@ public class JdkProxyDemo {
         });
 
         proxy.foo();
+        System.out.println("-------");
+        proxy.toString();
+        System.out.println("-------");
+        proxy.hashCode();
+        System.out.println("-------");
+        proxy.equals(proxy);
     }
 }
