@@ -10,6 +10,7 @@
         <module>aspectj_01</module>
         <module>aspectj_02</module>
         <module>aop</module>
+        <module>asm</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
