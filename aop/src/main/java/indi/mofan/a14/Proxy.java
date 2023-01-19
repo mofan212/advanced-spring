@@ -12,9 +12,9 @@ import java.lang.reflect.UndeclaredThrowableException;
  */
 public class Proxy extends Target {
 
-    private final MethodInterceptor methodInterceptor;
+    private MethodInterceptor methodInterceptor;
 
-    public Proxy(MethodInterceptor methodInterceptor) {
+    public void setMethodInterceptor(MethodInterceptor methodInterceptor) {
         this.methodInterceptor = methodInterceptor;
     }
 

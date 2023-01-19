@@ -13,7 +13,8 @@ public class A14 {
     public static void main(String[] args) {
         Target target = new Target();
 
-        Proxy proxy = new Proxy(new MethodInterceptor() {
+        Proxy proxy = new Proxy();
+        proxy.setMethodInterceptor(new MethodInterceptor() {
             @Override
             public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
                 System.out.println("before");
