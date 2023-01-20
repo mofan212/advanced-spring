@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ConfigurationClassPostProcessor;
 import org.springframework.context.support.GenericApplicationContext;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -65,6 +66,7 @@ public class A17 {
      * 高级切面
      */
     @Aspect
+    @Order(1)
     static class Aspect1 {
         @Before("execution(* foo())")
         public void before() {
@@ -86,7 +88,10 @@ public class A17 {
         public Advisor advisor3(MethodInterceptor advice3) {
             AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
             pointcut.setExpression("execution(* foo())");
-            return new DefaultPointcutAdvisor(pointcut, advice3);
+            DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, advice3);
+            // 设置切面执行顺序
+            advisor.setOrder(2);
+            return advisor;
         }
 
         @Bean
