@@ -11,6 +11,7 @@
         <module>aspectj_02</module>
         <module>aop</module>
         <module>asm</module>
+        <module>mvc</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
