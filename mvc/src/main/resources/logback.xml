@@ -84,7 +84,7 @@
         <appender-ref ref="boldWhite"/>
     </logger>
 
-    <logger name="com.itheima" level="debug" additivity="false">
+    <logger name="indi.mofan" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
