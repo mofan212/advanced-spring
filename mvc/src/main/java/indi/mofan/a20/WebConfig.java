@@ -12,6 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.Collections;
+
 /**
  * @author mofan
  * @date 2023/1/22 22:38
@@ -51,5 +53,15 @@ public class WebConfig {
     @Bean
     public RequestMappingHandlerMapping requestMappingHandlerMapping() {
         return new RequestMappingHandlerMapping();
+    }
+
+    @Bean
+    public MyRequestMappingHandlerAdapter myRequestMappingHandlerAdapter() {
+        TokenArgumentResolver tokenArgumentResolver = new TokenArgumentResolver();
+        MyRequestMappingHandlerAdapter adapter = new MyRequestMappingHandlerAdapter();
+        adapter.setCustomArgumentResolvers(Collections.singletonList(tokenArgumentResolver));
+        YmlReturnValueHandler ymlReturnValueHandler = new YmlReturnValueHandler();
+        adapter.setCustomReturnValueHandlers(Collections.singletonList(ymlReturnValueHandler));
+        return adapter;
     }
 }
