@@ -5,13 +5,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.method.annotation.ExpressionValueMethodArgumentResolver;
+import org.springframework.web.method.annotation.ModelFactory;
 import org.springframework.web.method.annotation.RequestHeaderMethodArgumentResolver;
 import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolverComposite;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.mvc.method.annotation.PathVariableMethodArgumentResolver;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 import org.springframework.web.servlet.mvc.method.annotation.ServletCookieValueMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod;
@@ -19,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ServletModelAttribu
 import org.springframework.web.servlet.mvc.method.annotation.ServletRequestDataBinderFactory;
 import org.springframework.web.servlet.mvc.method.annotation.ServletRequestMethodArgumentResolver;
 
+import java.lang.reflect.Method;
 import java.util.Collections;
 
 /**
@@ -29,6 +34,10 @@ public class A26 {
     @SneakyThrows
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(WebConfig.class);
+
+        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+        adapter.setApplicationContext(context);
+        adapter.afterPropertiesSet();
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("name", "mofan");
@@ -43,6 +52,15 @@ public class A26 {
         // 暂不考虑返回值的处理
 
         ModelAndViewContainer container = new ModelAndViewContainer();
+
+        // 获取模型工厂
+        Method getModelFactory = RequestMappingHandlerAdapter.class.getDeclaredMethod("getModelFactory", HandlerMethod.class, WebDataBinderFactory.class);
+        getModelFactory.setAccessible(true);
+        ModelFactory modelFactory = (ModelFactory) getModelFactory.invoke(adapter, handlerMethod, binderFactory);
+
+        // 初始化模型数据
+        modelFactory.initModel(new ServletWebRequest(request), container, handlerMethod);
+
         handlerMethod.invokeAndHandle(new ServletWebRequest(request), container);
         System.out.println(container.getModel());
 
