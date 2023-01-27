@@ -1,20 +1,19 @@
-package indi.mofan.listener;
+package indi.mofan.bean.a01;
 
-import indi.mofan.event.MyEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 /**
  * @author mofan
- * @date 2022/12/19 21:58
+ * @date 2022/12/18 16:24
  */
 @Slf4j
 @Component
-public class MyListener {
-
+public class Component2 {
     @EventListener
-    public void messageListener(MyEvent event) {
-        log.info("{}", event.getName());
+    public void aaa(UserRegisteredEvent event) {
+        log.debug("{}", event);
+        log.debug("发送短信");
     }
 }

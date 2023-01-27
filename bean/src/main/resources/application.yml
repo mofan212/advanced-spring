@@ -1,0 +1,12 @@
+#{"author.name":"mofan"}
+properties:
+  name: "mofan"
+  age: 20
+person:
+  gender: "man"
+
+spring:
+  datasource:
+    name: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/advanced_spring
