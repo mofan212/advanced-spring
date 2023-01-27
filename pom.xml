@@ -11,6 +11,8 @@
         <module>aop</module>
         <module>asm</module>
         <module>mvc</module>
+        <module>boot </module>
+        <module>test_war</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
