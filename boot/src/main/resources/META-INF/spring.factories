@@ -1,0 +1,4 @@
+# 内部类作为 key 时，最后以 $ 符号分割
+indi.mofan.a41.A41$MyImportSelector=\
+  indi.mofan.a41.A41.AutoConfiguration1, \
+  indi.mofan.a41.A41.AutoConfiguration2
