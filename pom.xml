@@ -13,6 +13,7 @@
         <module>mvc</module>
         <module>boot </module>
         <module>test_war</module>
+        <module>sundry</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
