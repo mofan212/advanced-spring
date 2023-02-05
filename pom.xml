@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>assemble</module>
         <module>bean</module>
         <module>aspectj_01</module>
         <module>aspectj_02</module>
