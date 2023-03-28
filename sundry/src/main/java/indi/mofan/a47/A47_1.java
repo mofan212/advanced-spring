@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
@@ -60,6 +61,15 @@ public class A47_1 {
         Object proxy = resolver.getLazyResolutionProxyIfNecessary(dd5, "bean1");
         System.out.println(proxy);
         System.out.println(proxy.getClass());
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        // 6. 补充对 Provider 的处理
+        DependencyDescriptor dd6 = new DependencyDescriptor(Bean1.class.getDeclaredField("bean5"), false);
+        if (Provider.class.equals(dd6.getDependencyType())) {
+            dd6.increaseNestingLevel();
+            Provider<Bean2> provider = () ->
+                    (Bean2)  beanFactory.doResolveDependency(dd6, "bean1", null, null);
+            System.out.println(provider.get());
+        }
     }
 
     static class Bean1 {
@@ -77,6 +87,9 @@ public class A47_1 {
 
         @Autowired
         private ObjectFactory<Bean2> bean4;
+
+        @Autowired
+        private Provider<Bean2> bean5;
     }
 
     @Component("bean2")

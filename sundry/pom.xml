@@ -20,6 +20,13 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <!--  不要惊讶，版本号就是 1  -->
+            <version>1</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>org.springframework</groupId>-->
 <!--            <artifactId>spring-context-indexer</artifactId>-->
