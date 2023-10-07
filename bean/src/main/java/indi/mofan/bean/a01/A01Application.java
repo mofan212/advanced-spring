@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.util.Assert;
 
 import java.lang.reflect.Field;
 import java.util.Locale;
@@ -38,11 +39,11 @@ public class A01Application {
         System.out.println(context.getMessage("thanks", null, Locale.TRADITIONAL_CHINESE));
 
         Resource[] resources = context.getResources("classpath:application.properties");
-        assert resources.length > 0;
+        Assert.isTrue(resources.length > 0, "加载类路径下的 application.properties 文件失败");
 
         // 使用 classpath* 可以加载 jar 里类路径下的 resource
         resources = context.getResources("classpath*:META-INF/spring.factories");
-        assert resources.length > 0;
+        Assert.isTrue(resources.length > 0, "加载类路径下的 META-INF/spring.factories 文件失败");
 
         System.out.println(context.getEnvironment().getProperty("java_home"));
         System.out.println(context.getEnvironment().getProperty("properties.name"));
