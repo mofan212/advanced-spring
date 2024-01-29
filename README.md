@@ -19,3 +19,11 @@ mvn compile
 ```
 
 否则会在 `indi.mofan.a22.A22` 类中提示找不到 `Bean2`。
+
+# 3. 推荐阅读
+
+- [从回调到 LambdaSafe](https://mofan212.github.io/posts/From-Callback-To-LambdaSafe/)
+- [获取 ApplicationContext](https://mofan212.github.io/posts/Get-ApplicationContext/)
+- [@Configuration 注解的那些事](https://mofan212.github.io/posts/Configuration-Annotation/)
+- [@SpringBoot 常用拓展点](https://mofan212.github.io/posts/Common-Extension-Points-In-Spring-Boot/) (**强烈推荐**)
+- [SpringBoot Shutdown Hook](https://mofan212.github.io/posts/SpringBoot-Shutdown-Hook/)
