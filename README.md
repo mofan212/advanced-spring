@@ -27,3 +27,6 @@ mvn compile
 - [@Configuration 注解的那些事](https://mofan212.github.io/posts/Configuration-Annotation/)
 - [@SpringBoot 常用拓展点](https://mofan212.github.io/posts/Common-Extension-Points-In-Spring-Boot/) (**强烈推荐**)
 - [SpringBoot Shutdown Hook](https://mofan212.github.io/posts/SpringBoot-Shutdown-Hook/)
+- [Spring 的事件监听机制](https://mofan212.github.io/posts/Spring-Application-Event/) (**推荐**)
+- [BeanDefinition](https://mofan212.github.io/posts/Spring-BeanDefinition/)
+- [Spring 配置类的解析](https://mofan212.github.io/posts/How-To-Parse-Spring-Configuration-Classes/) (**推荐**)
